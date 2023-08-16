@@ -28,7 +28,7 @@ const productSchema = new mongooes.Schema(
         },
         is_active : {
             type : Boolean,
-            trim : true 
+            trim : true
         }
     },
     {
