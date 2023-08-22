@@ -1,2 +1,4 @@
-module.exports.userController = require("./user.controller");
-module.exports.tokenController = require("./token.controller");
+module.exports.userController = require("./user.controllers");
+module.exports.bookController = require("./book.controllers");
+module.exports.categoryController = require("./category.controller");
+
