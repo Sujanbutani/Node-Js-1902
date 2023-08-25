@@ -1,14 +1,14 @@
 const { Book } = require("../models");
 
 /**
- * Create Book
+ * Create book
  * @param {object} reqBody
- * @returns {Promise<category>}
+ * @returns {Promise<book>}
  */
 const createbook = async (reqBody) => {
   return Book.create(reqBody);
 };
 
 module.exports = {
-    createbook
+  createbook,
 };

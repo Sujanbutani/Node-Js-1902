@@ -1,13 +1,13 @@
 const { bookService} = require("../services");
 
 
-/** create user */
+/** create book */
 const createBook = async (req, res) => {
   try {
     const reqBody = req.body;
-    // const userExists = await userService.getUserByEmail(reqBody.email);
-    // if (userExists) {
-    //   throw new Error("User already created by this email!");
+    // const bookExists = await bookService.getbookByEmail(reqBody.email);
+    // if (bookExists) {
+    //   throw new Error("book already created by this email!");
     // }
 
     const book = await bookService.createbook(reqBody);
@@ -18,7 +18,7 @@ const createBook = async (req, res) => {
     res.status(200).json({
       success: true,
       message:'book Create Successfully',
-      data: { reqBody },
+      data: { book },
     });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
