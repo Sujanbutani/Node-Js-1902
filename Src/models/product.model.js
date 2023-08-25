@@ -1,6 +1,6 @@
-const mongooes = require("mongooes")
+const mongoose = require("mongoose")
 
-const productSchema = new mongooes.Schema(
+const productSchema = new mongoose.Schema(
     {
         product_name : {
             type : String,
@@ -37,6 +37,6 @@ const productSchema = new mongooes.Schema(
     }
 );
 
-const Product = mongooes.model("product", productSchema)
+const Product = mongoose.model("product", productSchema)
 
 module.exports = Product;

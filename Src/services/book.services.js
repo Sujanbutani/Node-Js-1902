@@ -1,4 +1,4 @@
-const { book } = require("../models");
+const { Book } = require("../models");
 
 /**
  * Create book
@@ -6,7 +6,7 @@ const { book } = require("../models");
  * @returns {Promise<book>}
  */
 const createbook = async (reqBody) => {
-  return book.create(reqBody);
+  return Book.create(reqBody);
 };
 
 module.exports = {
