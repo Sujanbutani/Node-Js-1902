@@ -10,7 +10,7 @@ const createTravel = async (reqBody) => {
 };
 
 const getTravelList = async(req, res)=>{
-  return travel.find()
+  return travel.find({$or : [{is_active : false}]})
 };
 
 const deletetravel = async(TravelId) => {

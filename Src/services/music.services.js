@@ -10,7 +10,7 @@ const createMusic = async (reqBody) => {
 };
 
 const getMusicList = async(req, res)=>{
-  return music.find()
+  return music.find({$or :[{is_active : false}]})
 };
 
 const deletemusic = async(MusicId) => {
