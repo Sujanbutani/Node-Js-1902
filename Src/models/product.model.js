@@ -1,35 +1,35 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema(
     {
-        product_name : {
+        Product_name : {
             type : String,
             trim : true
         },
-        product_desc : {
+        Product_desc : {
             type : String,
             trim : true
         },
-        product_category : {
-            type : String,
-            trim : true
-        },
-        product_price : {
+        Product_Price : {
             type : Number,
             trim : true
         },
-        product_quality : {
+        Product_category : {
             type : String,
             trim : true
         },
-        product_stock : {
+        Product_quality : {
+            type : String,
+            trim : true
+        },
+        Product_stock : {
             type : Number,
             trim : true
         },
-        is_active : {
+        is_active :{
             type : Boolean,
-            trim : true
-        }
+            default : true
+        },
     },
     {
         timestamps : true,
@@ -37,6 +37,6 @@ const productSchema = new mongoose.Schema(
     }
 );
 
-const Product = mongoose.model("product", productSchema)
+const product = mongoose.model("product",productSchema)
 
-module.exports = Product;
+module.exports = product

@@ -1,5 +1,5 @@
 const express = require("express");
-const { userValidation } = require("../../validations");
+// const { userValidation } = require("../../validations");
 const { categoryController } = require("../../controllers");
 // const validate = require("../../middlewares/validation");
 
@@ -11,13 +11,18 @@ router.post(
   // validate(userValidation.createUser),
   categoryController.createcategory
 );
+/** Get grocery list */
+router.get(
+  "/list",
+  // validate(groceryValidation.getgroceryList),
+  categoryController.getCategoryList
+);
 
-
-/** Get user list */
-// router.get(
-//   "/list",
-//   // validate(userValidation.getUserList),
-//   userController.getUserList
-// );
+/**  Delete grocery */
+router.delete(
+  "/delete-category/:categoryId",
+  // validate(categoryValidation.getcategoryList),
+  categoryController.deletecategory
+);
 
 module.exports = router;

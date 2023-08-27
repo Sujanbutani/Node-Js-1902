@@ -1,6 +1,7 @@
 const express = require("express");
 const userRoute = require("./user.route");
 const categoryRoute = require("./category.route");
+const productRoute = require("./product.route");
 const bookRoute = require("./book.route");
 const busRoute = require("./bus.route");
 const schoolRoute = require("./school.route");
@@ -12,12 +13,14 @@ const pharmacyRoute = require("./pharmacy.route");
 const jewelleryRoute = require("./jewellery.route")
 const groceryRoute = require("./grocery.route")
 const satationaryRoute = require("./satationary.route")
+const e_commerceRoute=require("./e-commerce.route");
 
 
 const router = express.Router();
 
 router.use("/user", userRoute);
 router.use("/category", categoryRoute);
+router.use("/product", productRoute);
 router.use("/book", bookRoute);
 router.use("/bus", busRoute);
 router.use("/school", schoolRoute);
@@ -29,6 +32,7 @@ router.use("/pharmacy", pharmacyRoute);
 router.use("/jewellery", jewelleryRoute);
 router.use("/grocery", groceryRoute);
 router.use("/satationary", satationaryRoute);
+router.use("/e-commerce",e_commerceRoute)
 
 
 module.exports = router;
