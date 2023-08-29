@@ -1,28 +1,35 @@
 const express = require("express");
-// const { userValidation } = require("../../validations");
 const { schoolController } = require("../../controllers");
-// const validate = require("../../middlewares/validation");
 
 const router = express.Router();
 
 /** create school */
 router.post(
   "/create-school",
-  // validate(schoolValidation.createSchool),
   schoolController.createSchool
 );
 
 /** Get school list */
 router.get(
   "/list",
-  // validate(schoolValidation.getschoolList),
   schoolController.getSchoolList
+);
+
+/** Get school details by id */
+router.get(
+  "/get-details/:schoolId",
+  schoolController.getSchoolDetails
+);
+
+/** upadate school */
+router.put(
+  "/update-details/:schoolId",
+  schoolController.updateDetails
 );
 
 /**  Delete bus */
 router.delete(
   "/delete-school/:schoolId",
-  // validate(schoolValidation.getschoolList),
   schoolController.deleteschool
 );
 

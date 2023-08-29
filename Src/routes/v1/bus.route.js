@@ -1,28 +1,35 @@
 const express = require("express");
-// const { userValidation } = require("../../validations");
 const { busController } = require("../../controllers");
-// const validate = require("../../middlewares/validation");
 
 const router = express.Router();
 
 /** create bus */
 router.post(
   "/create-bus",
-  // validate(userValidation.createBus),
   busController.createBus
 );
 
 /** Get Bus list */
 router.get(
   "/list",
-  // validate(busValidation.getbusList),
   busController.getBusList
+);
+
+/** Get user details by id */
+router.get(
+  "/get-details/:busId",
+  busController.getBusDetails
+);
+
+/** upadate bus */
+router.put(
+  "/update-details/:busId",
+  busController.updateDetails
 );
 
 /**  Delete bus */
 router.delete(
   "/delete-bus/:busId",
-  // validate(busValidation.getbusList),
   busController.deletebus
 );
 

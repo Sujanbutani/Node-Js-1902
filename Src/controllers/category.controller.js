@@ -7,10 +7,6 @@ const createcategory = async (req, res) => {
     const reqBody = req.body;
 
       console.log(reqBody);
-    // const categoryExists = await categoryService.getcategoryByEmail(reqBody.email);
-    // if (categoryExists) {
-    //   throw new Error("category already created by this email!");
-    // }
 
     const category = await categoryService.createcategory(reqBody);
     if (!category) {
@@ -40,11 +36,48 @@ const getCategoryList = async (req, res) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+// Get category details by id
+
+const getCategoryDetails = async (req, res) => {
+  try {
+    const getDetails = await categoryService.getCategoryById(req.params.categoryId);
+    if (!getDetails) {
+      throw new Error("Category not found!");
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Category details get successfully!",
+      data: getDetails,
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+/** category details update by id */
+const updateDetails = async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId;
+    const categoryExists = await categoryService.getCategoryById(categoryId);
+    if (!categoryExists) {
+      throw new Error("Category not found!");
+    }
+
+    await categoryService.updateDetails(categoryId, req.body);
+    res
+      .status(200)
+      .json({ success: true, message: "Category details update successfully!" });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 /** Delete Category */
 const deletecategory = async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
-    // const userExists = await userService.getUserById(userId);
     if (!categoryId) {
       throw new Error("category not found!");
     }
@@ -62,5 +95,7 @@ const deletecategory = async (req, res) => {
 module.exports = {
   createcategory,
   getCategoryList,
+  getCategoryDetails,
+  updateDetails,
   deletecategory
 };

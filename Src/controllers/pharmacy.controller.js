@@ -4,10 +4,6 @@ const { pharmacyService} = require("../services");
 const createPharmacy = async (req, res) => {
   try {
     const reqBody = req.body;
-    // const pharmacyExists = await pharmacyService.getpharmacyByEmail(reqBody.email);
-    // if (pharmacyExists) {
-    //   throw new Error("pharmacy already created by this email!");
-    // }
 
     const pharmacy = await pharmacyService.createPharmacy(reqBody);
     if (!pharmacy) {
@@ -30,18 +26,55 @@ const getPharmacyList = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Get user list successfully!",
+      message: "Get pharmacy list successfully!",
       data: getList,
     });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+// Get pharmacy details by id
+
+const getPharmacyDetails = async (req, res) => {
+  try {
+    const getDetails = await pharmacyService.getPharmacyById(req.params.pharmacyId);
+    if (!getDetails) {
+      throw new Error("Pharmacy not found!");
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Pharmacy details get successfully!",
+      data: getDetails,
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+/** pharmacy details update by id */
+const updateDetails = async (req, res) => {
+  try {
+    const pharmacyId = req.params.pharmacyId;
+    const pharmacyExists = await pharmacyService.getPharmacyById(pharmacyId);
+    if (!pharmacyExists) {
+      throw new Error("Pharmacy not found!");
+    }
+
+    await pharmacyService.updateDetails(pharmacyId, req.body);
+    res
+      .status(200)
+      .json({ success: true, message: "Pharmacy details update successfully!" });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 /** Delete pharmacy */
 const deletepharmacy = async (req, res) => {
   try {
     const pharmacyId = req.params.pharmacyId;
-    // const userExists = await userService.getUserById(userId);
     if (!pharmacyId) {
       throw new Error("Pharmacy not found!");
     }
@@ -60,5 +93,7 @@ const deletepharmacy = async (req, res) => {
 module.exports = {
   createPharmacy,
   getPharmacyList,
+  updateDetails,
+  getPharmacyDetails,
   deletepharmacy
 };

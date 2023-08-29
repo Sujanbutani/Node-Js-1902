@@ -13,6 +13,14 @@ const getUserList = async(req, res)=>{
   return user.find({$or : [{is_active : false}]});
 };
 
+const getUserById = async (userId) => {
+  return user.findById(userId);
+};
+
+const updateDetails = async (userId, updateBody) => {
+  return user.findByIdAndUpdate(userId, { $set: updateBody });
+};
+
 const deleteuser = async(UserId) => {
   return user.findByIdAndDelete(UserId);
 };
@@ -20,5 +28,7 @@ const deleteuser = async(UserId) => {
 module.exports = {
   createUser,
   getUserList,
+  getUserById,
+  updateDetails,
   deleteuser
 };

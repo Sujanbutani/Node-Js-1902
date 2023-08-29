@@ -4,10 +4,6 @@ const { musicService} = require("../services");
 const createMusic = async (req, res) => {
   try {
     const reqBody = req.body;
-    // const musicExists = await musicService.getmusicByEmail(reqBody.email);
-    // if (musicExists) {
-    //   throw new Error("music already created by this email!");
-    // }
 
     const music = await musicService.createMusic(reqBody);
     if (!music) {
@@ -30,18 +26,55 @@ const getMusicList = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Get user list successfully!",
+      message: "Get music list successfully!",
       data: getList,
     });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+// Get music details by id
+
+const getMusicDetails = async (req, res) => {
+  try {
+    const getDetails = await musicService.getMusicById(req.params.musicId);
+    if (!getDetails) {
+      throw new Error("Music not found!");
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Music details get successfully!",
+      data: getDetails,
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+/** music details update by id */
+const updateDetails = async (req, res) => {
+  try {
+    const musicId = req.params.musicId;
+    const musicExists = await musicService.getMusicById(musicId);
+    if (!musicExists) {
+      throw new Error("Music not found!");
+    }
+
+    await musicService.updateDetails(musicId, req.body);
+    res
+      .status(200)
+      .json({ success: true, message: "Music details update successfully!" });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 /** Delete music */
 const deletemusic = async (req, res) => {
   try {
     const musicId = req.params.musicId;
-    // const userExists = await userService.getUserById(userId);
     if (!musicId) {
       throw new Error("Music not found!");
     }
@@ -60,5 +93,7 @@ const deletemusic = async (req, res) => {
 module.exports = {
   createMusic,
   getMusicList,
+  updateDetails,
+  getMusicDetails,
   deletemusic
 };

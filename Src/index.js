@@ -15,12 +15,6 @@ connectDB();
 // create server using http
 const server = http.createServer(app);
 
-// parse application/json
-
-// http.createServer(function (req, res) {
-//   res.write('sujan');
-//   res.end();
-// }).listen(8080);
 server.listen(config.port, () =>{
   console.log("server listning port number 8080");
 });

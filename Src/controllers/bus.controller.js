@@ -5,10 +5,6 @@ const { busService} = require("../services");
 const createBus = async (req, res) => {
   try {
     const reqBody = req.body;
-    // const busExists = await busService.getbusByEmail(reqBody.email);
-    // if (busExists) {
-    //   throw new Error("bus already created by this email!");
-    // }
 
     const bus = await busService.createBus(reqBody);
     if (!bus) {
@@ -31,9 +27,45 @@ const getBusList = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Get user list successfully!",
+      message: "Get bus list successfully!",
       data: getList,
     });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+// Get bus details by id
+
+const getBusDetails = async (req, res) => {
+  try {
+    const getDetails = await busService.getBusById(req.params.busId);
+    if (!getDetails) {
+      throw new Error("Bus not found!");
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Bus details get successfully!",
+      data: getDetails,
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+/** bus details update by id */
+const updateDetails = async (req, res) => {
+  try {
+    const busId = req.params.busId;
+    const busExists = await busService.getBusById(busId);
+    if (!busExists) {
+      throw new Error("Bus not found!");
+    }
+
+    await busService.updateDetails(busId, req.body);
+    res
+      .status(200)
+      .json({ success: true, message: "Bus details update successfully!" });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
@@ -42,7 +74,6 @@ const getBusList = async (req, res) => {
 const deletebus = async (req, res) => {
   try {
     const busId = req.params.busId;
-    // const userExists = await userService.getUserById(userId);
     if (!busId) {
       throw new Error("Bus not found!");
     }
@@ -51,7 +82,7 @@ const deletebus = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "BUs delete successfully!",
+      message: "BUS delete successfully!",
     });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
@@ -61,5 +92,7 @@ const deletebus = async (req, res) => {
 module.exports = {
   createBus,
   getBusList,
+  getBusDetails,
+  updateDetails,
   deletebus
 };

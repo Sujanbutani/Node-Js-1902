@@ -1,22 +1,36 @@
 const express = require("express");
-// const { userValidation } = require("../../validations");
 const { bookController } = require("../../controllers");
-// const validate = require("../../middlewares/validation");
 
 const  router = express.Router();
 
 /** create book */
 router.post(
   "/create-book",
-  // validate(userValidation.createBook),
   bookController.createBook
 );
 
 /** Get Book list */
-// router.get(
-//   "/list",
-//   // validate(bookValidation.getBookList),
-//   bookController.getBookList
-// );
+router.get(
+  "/list",
+  bookController.getBookList
+);
+
+/** Get user details by id */
+router.get(
+  "/get-details/:bookId",
+  bookController.getBookDetails
+);
+
+/** upadate book */
+router.put(
+  "/update-details/:bookId",
+  bookController.updateDetails
+);
+
+/**  Delete book */
+router.delete(
+  "/delete-book/:bookId",
+  bookController.deletebook
+);
 
 module.exports = router;

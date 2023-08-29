@@ -13,6 +13,14 @@ const getStationaryList = async(req, res)=>{
   return stationary.find({$or :[{is_active : false}]})
 };
 
+const getStationaryById = async (stationaryId) => {
+  return stationary.findById(stationaryId);
+};
+
+const updateDetails = async (stationaryId, updateBody) => {
+  return stationary.findByIdAndUpdate(stationaryId, { $set: updateBody });
+};
+
 const deletestationary = async(StationaryId) => {
   return stationary.findByIdAndDelete(StationaryId);
 };
@@ -20,5 +28,7 @@ const deletestationary = async(StationaryId) => {
 module.exports = {
   createStationary,
   getStationaryList,
+  getStationaryById,
+  updateDetails,
   deletestationary
 };

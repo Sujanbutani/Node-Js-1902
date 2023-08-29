@@ -1,28 +1,35 @@
 const express = require("express");
-// const { userValidation } = require("../../validations");
 const { hotelController } = require("../../controllers");
-// const validate = require("../../middlewares/validation");
 
 const router = express.Router();
 
 /** create hotel */
 router.post(
   "/create-hotel",
-  // validate(hotelValidation.createHotel),
   hotelController.createHotel
 );
 
 /** Get hotel list */
 router.get(
   "/list",
-  // validate(hotelValidation.gethotelList),
   hotelController.getHotelList
+);
+
+/** Get hotel details by id */
+router.get(
+  "/get-details/:hotelId",
+  hotelController.getHotelDetails
+);
+
+/** upadate hotel */
+router.put(
+  "/update-details/:hotelId",
+  hotelController.updateDetails
 );
 
 /**  Delete hotel */
 router.delete(
   "/delete-hotel/:hotelId",
-  // validate(hotelValidation.gethotelList),
   hotelController.deletehotel
 );
 

@@ -13,6 +13,14 @@ const getPharmacyList = async(req, res)=>{
   return pharmacy.find({$or : [{is_active : false}]})
 };
 
+const getPharmacyById = async (pharmacyId) => {
+  return pharmacy.findById(pharmacyId);
+};
+
+const updateDetails = async (pharmacyId, updateBody) => {
+  return pharmacy.findByIdAndUpdate(pharmacyId, { $set: updateBody });
+};
+
 const deletepharmacy = async(PharmacyId) => {
   return pharmacy.findByIdAndDelete(PharmacyId);
 };
@@ -20,5 +28,7 @@ const deletepharmacy = async(PharmacyId) => {
 module.exports = {
   createPharmacy,
   getPharmacyList,
+  getPharmacyById,
+  updateDetails,
   deletepharmacy
 };

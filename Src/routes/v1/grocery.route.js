@@ -1,28 +1,35 @@
 const express = require("express");
-// const { userValidation } = require("../../validations");
 const { groceryController } = require("../../controllers");
-// const validate = require("../../middlewares/validation");
 
 const router = express.Router();
 
 /** create grocery */
 router.post(
   "/create-grocery",
-  // validate(groceryValidation.creategrocery),
   groceryController.createGrocery
 );
 
 /** Get grocery list */
 router.get(
   "/list",
-  // validate(groceryValidation.getgroceryList),
   groceryController.getGroceryList
+);
+
+/** Get grocery details by id */
+router.get(
+  "/get-details/:groceryId",
+  groceryController.getGroceryDetails
+);
+
+/** upadate grocery */
+router.put(
+  "/update-details/:groceryId",
+  groceryController.updateDetails
 );
 
 /**  Delete grocery */
 router.delete(
   "/delete-grocery/:groceryId",
-  // validate(groceryValidation.getgroceryList),
   groceryController.deletegrocery
 );
 

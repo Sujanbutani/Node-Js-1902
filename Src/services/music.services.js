@@ -13,6 +13,14 @@ const getMusicList = async(req, res)=>{
   return music.find({$or :[{is_active : false}]})
 };
 
+const getMusicById = async (musicId) => {
+  return music.findById(musicId);
+};
+
+const updateDetails = async (musicId, updateBody) => {
+  return music.findByIdAndUpdate(musicId, { $set: updateBody });
+};
+
 const deletemusic = async(MusicId) => {
   return music.findByIdAndDelete(MusicId);
 };
@@ -20,5 +28,7 @@ const deletemusic = async(MusicId) => {
 module.exports = {
   createMusic,
   getMusicList,
+  getMusicById,
+  updateDetails,
   deletemusic
 };

@@ -4,10 +4,6 @@ const { stationaryService} = require("../services");
 const createStationary = async (req, res) => {
   try {
     const reqBody = req.body;
-    // const stationaryExists = await stationaryService.getstationaryByEmail(reqBody.email);
-    // if (stationaryExists) {
-    //   throw new Error("stationary already created by this email!");
-    // }
 
     const stationary = await stationaryService.createStationary(reqBody);
     if (!stationary) {
@@ -30,18 +26,55 @@ const getStationaryList = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Get user list successfully!",
+      message: "Get stationary list successfully!",
       data: getList,
     });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+// Get stationary details by id
+
+const getStationaryDetails = async (req, res) => {
+  try {
+    const getDetails = await stationaryService.getStationaryById(req.params.stationaryId);
+    if (!getDetails) {
+      throw new Error("Stationary not found!");
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Stationary details get successfully!",
+      data: getDetails,
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+/** stationary details update by id */
+const updateDetails = async (req, res) => {
+  try {
+    const stationaryId = req.params.stationaryId;
+    const stationaryExists = await stationaryService.getStationaryById(stationaryId);
+    if (!stationaryExists) {
+      throw new Error("Stationary not found!");
+    }
+
+    await stationaryService.updateDetails(stationaryId, req.body);
+    res
+      .status(200)
+      .json({ success: true, message: "Stationary details update successfully!" });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 /** Delete stationary */
 const deletestationary = async (req, res) => {
   try {
     const stationaryId = req.params.stationaryId;
-    // const userExists = await userService.getUserById(userId);
     if (!stationaryId) {
       throw new Error("Stationary not found!");
     }
@@ -60,5 +93,7 @@ const deletestationary = async (req, res) => {
 module.exports = {
   createStationary,
   getStationaryList,
+  getStationaryDetails,
+  updateDetails,
   deletestationary
 };

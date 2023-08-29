@@ -2,19 +2,19 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
     {
-        Frist_name : {
+        frist_name : {
             type : String,
             trim : true
         },
-        Last_name : {
+        last_name : {
             type : String,
             trim : true
         },
-        Email : {
+        email : {
             type : String,
             trim : true
         },
-        Password : {
+        password : {
             type : String,
             trim : true
         },
