@@ -13,6 +13,8 @@ module.exports.jewelleryController = require("./jewellery.controller");
 module.exports.stationaryController = require("./stationary.controller");
 module.exports.groceryController = require("./grocery.controller");
 module.exports.e_commerceController=require("./e-commerce.controller");
+module.exports.mobileController=require("./mobile.controller");
+
 
 
 

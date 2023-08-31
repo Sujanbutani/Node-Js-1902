@@ -14,6 +14,8 @@ const jewelleryRoute = require("./jewellery.route")
 const groceryRoute = require("./grocery.route")
 const satationaryRoute = require("./satationary.route")
 const e_commerceRoute=require("./e-commerce.route");
+const mobileRoute=require("./mobile.route");
+
 
 
 const router = express.Router();
@@ -32,7 +34,9 @@ router.use("/pharmacy", pharmacyRoute);
 router.use("/jewellery", jewelleryRoute);
 router.use("/grocery", groceryRoute);
 router.use("/satationary", satationaryRoute);
-router.use("/e-commerce",e_commerceRoute)
+router.use("/e-commerce",e_commerceRoute);
+router.use("/mobile",mobileRoute);
+
 
 
 module.exports = router;

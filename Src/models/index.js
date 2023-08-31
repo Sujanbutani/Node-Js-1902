@@ -12,3 +12,4 @@ module.exports.pharmacy = require("./pharmacy.model");
 module.exports.jewellery = require("./jewellery.model");
 module.exports.stationary = require("./stationary.model");
 module.exports.grocery = require("./grocery.model");
+module.exports.mobile = require("./mobile.model");
