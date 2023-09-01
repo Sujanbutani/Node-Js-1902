@@ -29,6 +29,10 @@ const mobileSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
+    product : {
+        type : mongoose.Types.ObjectId,
+        ref : "product"
+    },
     is_active:{
         type:Boolean,
         default:true

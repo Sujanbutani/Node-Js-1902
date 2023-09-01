@@ -10,6 +10,10 @@ const bookSchema = new mongoose.Schema(
             type : String,
             trim : true
         },
+        stationary : {
+            type : mongoose.Types.ObjectId,
+            ref : "stationary"
+        },
         is_active :{
             type : Boolean,
             default : true
