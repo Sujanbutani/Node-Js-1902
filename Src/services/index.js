@@ -14,6 +14,10 @@ module.exports.stationaryService=require("./stationary.services");
 module.exports.groceryService=require("./grocery.services");
 module.exports.e_commerceService=require("./e-commerce.services");
 module.exports.mobileService=require("./mobile.services");
+module.exports.orderService=require("./order.services");
+module.exports.cartService=require("./cart.services");
+
+
 
 
 

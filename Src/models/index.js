@@ -13,5 +13,8 @@ module.exports.jewellery = require("./jewellery.model");
 module.exports.stationary = require("./stationary.model");
 module.exports.grocery = require("./grocery.model");
 module.exports.mobile = require("./mobile.model");
+module.exports.order = require("./order.model");
+module.exports.cart = require("./cart.model");
+
 // module.exports.token = require("./token.model");
 

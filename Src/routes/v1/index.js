@@ -15,6 +15,8 @@ const groceryRoute = require("./grocery.route")
 const satationaryRoute = require("./satationary.route")
 const e_commerceRoute=require("./e-commerce.route");
 const mobileRoute=require("./mobile.route");
+const orderRoute=require("./order.route");
+const cartRoute=require("./cart.route");
 // const tokenRoute=require("./token.route");
 
 const router = express.Router();
@@ -35,6 +37,9 @@ router.use("/grocery", groceryRoute);
 router.use("/satationary", satationaryRoute);
 router.use("/e-commerce",e_commerceRoute);
 router.use("/mobile",mobileRoute);
+router.use("/order",orderRoute);
+router.use("/cart",cartRoute);
+
 // router.use("/token",tokenRoute);
 
 module.exports = router;

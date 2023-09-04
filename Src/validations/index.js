@@ -12,6 +12,7 @@ module.exports.jewelleryValidation = require("./jewellery.validation");
 module.exports.jewelleryValidation = require("./stationary.validation");
 module.exports.productValidation = require("./product.validation");
 module.exports.mobileValidation = require("./mobile.validation");
+module.exports.orderValidation = require("./order.validation");
 // module.exports.tokenValidation = require("./token.validation");
 
 
