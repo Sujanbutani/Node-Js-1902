@@ -1,45 +1,73 @@
 const express = require("express");
-const userRoute = require("./user.route");
-const categoryRoute = require("./category.route");
-const productRoute = require("./product.route");
-const bookRoute = require("./book.route");
-const busRoute = require("./bus.route");
-const schoolRoute = require("./school.route");
-const hotelRoute = require("./hotel.route");
-const travelRoute = require("./travel.route");
+
 const movieRoute = require("./movie.route");
-const musicRoute = require("./music.route");
-const pharmacyRoute = require("./pharmacy.route");
-const jewelleryRoute = require("./jewellery.route")
-const groceryRoute = require("./grocery.route")
-const satationaryRoute = require("./satationary.route")
-const e_commerceRoute=require("./e-commerce.route");
-const mobileRoute=require("./mobile.route");
-const orderRoute=require("./order.route");
-const cartRoute=require("./cart.route");
-// const tokenRoute=require("./token.route");
 
 const router = express.Router();
 
-router.use("/user", userRoute);
-router.use("/category", categoryRoute);
-router.use("/product", productRoute);
-router.use("/book", bookRoute);
-router.use("/bus", busRoute);
-router.use("/school", schoolRoute);
-router.use("/hotel", hotelRoute);
-router.use("/travel", travelRoute);
 router.use("/movie", movieRoute);
-router.use("/music", musicRoute);
-router.use("/pharmacy", pharmacyRoute);
-router.use("/jewellery", jewelleryRoute);
-router.use("/grocery", groceryRoute);
-router.use("/satationary", satationaryRoute);
-router.use("/e-commerce",e_commerceRoute);
-router.use("/mobile",mobileRoute);
-router.use("/order",orderRoute);
-router.use("/cart",cartRoute);
 
-// router.use("/token",tokenRoute);
+/* GET home page. */
+router.get('/', (req, res, next) => {
+    res.render('index', { title: 'Express' });
+  });
+
+  router.post('/register', (req, res, next) => {
+    const {username, password} = req.body;
+
+    bcrypt.hash(password,10).then((hash) => {
+      const user = new User({
+        username,
+        password: hash
+      });
+
+      const promise = user.save();
+
+      promise.then((data) =>{
+        res.json(data);
+      }).catch((err) => {
+        res.json(err);
+      })
+    }).catch();
+  });
+
+  router.post('/authenticate',(req,res) => {
+    const {username, password} = req.body;
+
+    User.findOne({
+      username
+    },(err,user) =>{
+      if (err)
+        throw err;
+      if(!user){
+        res.json({
+          status: false,
+          message: 'Authentication failed, user not found'
+        });
+      }else{
+        bcrypt.compare(password, user.password).then((result) => {
+          if (!result){
+            res.json({
+              status: false,
+              message: 'Authentication failed, wrong password'
+            });
+          }else{
+            const payload = {
+              username
+            };
+            const token = jwt.sign(payload, req.app.get('api_secret_key'), {
+              expiresIn: 180 // 3 saat
+            });
+            res.json({
+              status: true,
+              token
+            })
+          }
+        })
+      }
+    });
+  });
+
+
+
 
 module.exports = router;

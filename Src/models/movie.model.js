@@ -4,6 +4,8 @@ const movieSchema = new mongoose.Schema(
     {
         Movie_name : {
             type : String,
+            maxlength: 15,
+            minlength: 3,
             trim : true
         },
         Movie_ticket_sit : {
@@ -21,10 +23,6 @@ const movieSchema = new mongoose.Schema(
         Screen_number : {
             type : Number,
             trim : true
-        },
-        music : {
-            type : mongoose.Types.ObjectId,
-            ref : "music"
         },
         is_active :{
             type : Boolean,
