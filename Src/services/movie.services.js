@@ -1,35 +1,27 @@
-const { movie } = require("../models");
+// services/movieService.js
+const { Movie } = require('../models/movie.model');
 
-/**
- * Create movie
- * @param {object} reqBody
- * @returns {Promise<movie>}
- */
-const createMovie = async (reqBody) => {
-  return movie.create(reqBody);
-};
+class MovieService {
+  async getAllMovies() {
+    return Movie.find();
+  }
 
-const getMovieList = async(req, res)=>{
-  return movie.find({$or :[{is_active : false}]})
-};
+  async getMovieById(id) {
+    return Movie.findById(id);
+  }
 
-const getMovieById = async (movieId) => {
-  return movie.findById(movieId);
-};
+  async addMovie(newMovie) {
+    const movie = new Movie(newMovie);
+    return movie.save();
+  }
 
-const updateDetails = async (movieId, updateBody) => {
-  return movie.findByIdAndUpdate(movieId, { $set: updateBody });
-};
+  async updateMovie(id, updatedMovie) {
+    return Movie.findByIdAndUpdate(id, updatedMovie, { new: true });
+  }
 
+  async deleteMovie(id) {
+    return Movie.findByIdAndRemove(id);
+  }
+}
 
-const deletemovie = async(MovieId) => {
-  return movie.findByIdAndDelete(MovieId);
-};
-
-module.exports = {
-  createMovie,
-  getMovieList,
-  getMovieById,
-  updateDetails,
-  deletemovie
-};
+module.exports = new MovieService();
